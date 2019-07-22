@@ -1,0 +1,12 @@
+--- # master playbook
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+#  roles:
+#   - webservers
+  roles:
+   - {role: redhatwebservers, when: ansible_os_family == "RedHat"}
+   - role: debianwebservers
+     when: ansible_os_family == "Debian"

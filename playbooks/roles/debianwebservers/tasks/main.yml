@@ -1,0 +1,4 @@
+- name: install apache for debain
+  apt: name=apache2 state=present
+  when: ansible_os_family == "Debian"
+  notify: restart apache2

@@ -1,0 +1,13 @@
+# create include.yml
+#- name: install httpd
+#  yum: pkg=httpd state=present
+  
+# create new playbook
+--- # include task playbook
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+   - include: include.yml

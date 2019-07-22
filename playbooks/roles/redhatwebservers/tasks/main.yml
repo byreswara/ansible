@@ -1,0 +1,4 @@
+- name: install apache for redhat
+  yum: name={{redhat_apache}} state=present
+  when: ansible_os_family == "RedHat"
+  notify: restart httpd

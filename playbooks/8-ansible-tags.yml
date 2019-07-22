@@ -1,0 +1,16 @@
+--- # include task playbook
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+   - name: echo task
+     raw: echo "byresh" >> /home/ansible/var.log
+     tags:
+      - echotask
+   - name: list task
+     raw: ls -la /home/ansible >> /home/ansible/var.log
+     tags:
+      - listtask
+# ansible-playbook tags.yml --tags "listtask"

@@ -1,0 +1,15 @@
+--- # handler playbook
+- hosts: demo
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars_files:
+   - vars.yml
+  tasks:
+   - name: install httpd on server
+     yum: name='{{pkg_name}}' state='{{app_state}}'
+     notify: restart the httpd
+  handlers:
+   - name: restart the httpd
+     action: service name='{{pkg_name}}' state='{{name}}'

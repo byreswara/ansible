@@ -1,0 +1,20 @@
+# ansible-playbook first.yml --check
+# ansible-playbook first.yml --extra-vars "name=started"
+--- # first play book with 3 section (target, variable, tasks)
+- hosts: local
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+   name: started
+  vars_files:
+   - vars.yml
+  vars_prompt:
+   - name: app_state
+     prompt: ENTER APP STATE
+  tasks:
+   - name: install httpd on server
+     yum: name='{{pkg_name}}' state='{{app_state}}'
+   - name: start service
+     service: name='{{pkg_name}}' state='{{name}}'

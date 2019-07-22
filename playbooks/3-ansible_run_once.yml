@@ -1,0 +1,13 @@
+--- # Run-once playbook
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+   - name: list
+     raw: ls -la /var > /home/ansible/var.log
+#     async: 300
+     poll: 3
+     run_once: true
+     delegate_to: localhost

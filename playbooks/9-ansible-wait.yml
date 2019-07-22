@@ -1,0 +1,17 @@
+--- # wait for playbook
+- hosts: local
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+   - name: install apache for redhat
+     service: name=httpd state=stopped
+   - name: wait until file exist    
+     wait_for:
+      path: /tmp/test2
+   - name: wait for the service startand port 80 listining
+     wait_for:
+      port: 80
+      state: started
+
